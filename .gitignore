@@ -15,14 +15,18 @@ app/etc/modules/Enterprise_*
 app/etc/modules/Find_Feed.xml
 app/etc/modules/Mage_All.xml
 app/etc/modules/Mage_Api.xml
+app/etc/modules/Mage_Api2.xml
 app/etc/modules/Mage_Authorizenet.xml
 app/etc/modules/Mage_Bundle.xml
+app/etc/modules/Mage_Captcha.xml
 app/etc/modules/Mage_Centinel.xml
 app/etc/modules/Mage_Compiler.xml
 app/etc/modules/Mage_Connect.xml
+app/etc/modules/Mage_CurrencySymbol.xml
 app/etc/modules/Mage_Downloadable.xml
 app/etc/modules/Mage_ImportExport.xml
 app/etc/modules/Mage_LoadTest.xml
+app/etc/modules/Mage_Oauth.xml
 app/etc/modules/Mage_PageCache.xml
 app/etc/modules/Mage_Persistent.xml
 app/etc/modules/Mage_Weee.xml
@@ -30,6 +34,7 @@ app/etc/modules/Mage_Widget.xml
 app/etc/modules/Mage_XmlConnect.xml
 app/etc/modules/Phoenix_Moneybookers.xml
 app/etc/config.xml
+app/etc/local.xml
 app/etc/enterprise.xml
 app/etc/local.xml.additional
 app/etc/local.xml.template
@@ -77,6 +82,8 @@ LICENSE.html
 LICENSE.txt
 LICENSE_EE*
 mage
+media/catalog
+media/dhl
 media/customer/
 media/downloadable/
 media/.htaccess
@@ -105,3 +112,6 @@ skin/frontend/default/modern/
 skin/frontend/enterprise
 skin/install/
 var/
+.htaccess
+.htaccess.sample
+api.php
