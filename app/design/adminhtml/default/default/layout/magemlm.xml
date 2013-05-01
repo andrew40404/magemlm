@@ -18,7 +18,7 @@
    </adminhtml_customer_edit>
    
 
-    <magemlm_adminhtml_structure_index>
+   <magemlm_adminhtml_structure_index>
         <reference name="content">
             <block type="magemlm/adminhtml_reports_products_form" name="productForm">
                 <action method="setTemplate">
@@ -26,26 +26,7 @@
                 </action>
             </block>
         </reference>
-    </magemlm_adminhtml_structure_index>
-    
-    
-    <chartreports_adminhtml_products_getproducts>
-        <block type="chartreports/adminhtml_reports_products_getproducts" name="root" output="toHtml">
-            <action method="setTemplate">
-                <template>chartreports/getproducts.phtml</template>
-            </action>
-        </block>
-    </chartreports_adminhtml_products_getproducts>
-    
-    
-    <chartreports_adminhtml_products_chart>
-        <reference name="content">
-            <block type="chartreports/adminhtml_reports_products_list" name="productChart">
-                <action method="setTemplate">
-                    <template>chartreports/chart.phtml</template>
-                </action>
-            </block>
-            </reference>
-    </chartreports_adminhtml_products_chart>
+   </magemlm_adminhtml_structure_index>
+
     
 </layout>
