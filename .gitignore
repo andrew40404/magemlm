@@ -116,3 +116,4 @@ var/
 .htaccess
 .htaccess.sample
 api.php
+test.php
