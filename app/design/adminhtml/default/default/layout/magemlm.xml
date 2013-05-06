@@ -10,13 +10,11 @@
         </reference>
    </default>
    
-   
    <adminhtml_customer_edit>
         <reference name="customer_edit_tabs">
             <action method="addTab"><name>customer_edit_tab_magemlm</name><block>magemlm/adminhtml_customer_edit_tab_magemlm</block></action>
         </reference>
    </adminhtml_customer_edit>
-   
 
    <magemlm_adminhtml_structure_index>
         <reference name="content">
@@ -27,6 +25,5 @@
             </block>
         </reference>
    </magemlm_adminhtml_structure_index>
-
     
 </layout>

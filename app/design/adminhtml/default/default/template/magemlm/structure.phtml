@@ -6,103 +6,35 @@
         });
     });
 </script>
+<?php // create collectio //
 
+    function displayStructure ($refferalId) {
+        
+        $collection       = Mage::getModel('magemlm/customer')->getCollection()->addFieldToFilter('refferer_id' , array ('eq' => $refferalId));
+        $structureHTML    = 'some text';
+        
+        if ($collection->count() > 0) {
+            echo '<ul>' ;
+            foreach ($collection as $customer) {
+                echo '<li>' ;
+                $image           = Mage::getBaseUrl('media') . DS . 'magemlm' . DS  . $customer->getMagemlmImage();
+                echo '<img src="'. $image . '" width="60px" /> ';
+                displayStructure ($customer->getCustomerId());
+                echo '</li>' ;
+            }
+            echo  '</ul>';
+        }
+        
+    }
+   
+?>
  <ul id="org" style="display:none;">
     <li>
        <?php echo Mage::app()->getStore()->getName() ; ?>
-       <ul>
-         <li id="beer"></li>
-         <li>Vegetables
-           <a href="http://wesnolte.com" target="_blank">Click me</a>
-           <ul>
-             <li>Pumpkin</li>
-             <li>
-                <a href="http://tquila.com" target="_blank">Aubergine</a>
-                <p>A link and paragraph is all we need.</p>
-             </li>
-           </ul>
-         </li>
-         <li class="fruit">Fruit
-           <ul>
-             <li>Apple
-               <ul>
-                 <li>Granny Smith</li>
-               </ul>
-             </li>
-             <li>Berries
-               <ul>
-                 <li>Blueberry</li>
-                 <li><img src="images/raspberry.jpg" alt="Raspberry"/>
-                    <ul>
-                        <li>Pumpkin</li>
-                        <li>
-                           <a href="http://tquila.com" target="_blank">Aubergine</a>
-                           <p>A link and paragraph is all we need.</p>
-                           
-                        </li>
-                    </ul>
-                 </li>
-                 <li>Cucumber</li>
-               </ul>
-             </li>
-           </ul>
-         </li>
-         <li>Bread
-             <ul>
-         <li id="beer"></li>
-         <li>Vegetables
-           <a href="http://wesnolte.com" target="_blank">Click me</a>
-           <ul>
-             <li>Pumpkin</li>
-             <li>
-                <a href="http://tquila.com" target="_blank">Aubergine</a>
-                <p>A link and paragraph is all we need.</p>
-             </li>
-           </ul>
-         </li>
-         <li class="fruit">Fruit
-           <ul>
-             <li>Apple
-               <ul>
-                 <li>Granny Smith</li>
-               </ul>
-             </li>
-             <li>Berries
-               <ul>
-                 <li>Blueberry</li>
-                 <li><img src="images/raspberry.jpg" alt="Raspberry"/>
-                    <ul>
-                        <li>Pumpkin</li>
-                        <li>
-                           <a href="http://tquila.com" target="_blank">Aubergine</a>
-                           <p>A link and paragraph is all we need.</p>
-                        </li>
-                    </ul>
-                 </li>
-                 <li><div style="padding: 5px;">Cucumber</div></li>
-               </ul>
-             </li>
-           </ul>
-         </li>
-         <li>Bread</li>
-         <li>Chocolate
-           <ul>
-             <li>Topdeck</li>
-             <li>Reese's Cups</li>
-           </ul>
-         </li>
-       </ul>
-         </li>
-         
-         <li>Chocolate
-           <ul>
-             <li>Topdeck</li>
-             <li>Reese's Cups</li>
-           </ul>
-         </li>
-       </ul>
-     </li>
-   </ul> 
+       <?php displayStructure(0); ?>
+    </li>
+    
+</ul> 
 
 
 <div id="chart" class="orgChart"></div>
