@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    /**
+     * Sellektor Redirect Module
+     *
+     * @category   Sellektor
+     * @package    Redirect
+     * @author     Jakub Winkler <jakub.winkler@gmail.com>
+     */
+-->
+<config>
+    <tabs>
+        <magemlm translate="label" module="magemlm">
+            <label>Qsolutions Studio</label>
+            <sort_order>100</sort_order>
+        </magemlm>
+    </tabs>
+    <sections>
+        <magemlm translate="label" module="magemlm">
+            <label>Multilevel Marketing Settings</label>
+            <tab>magemlm</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <magemlm_group translate="label" module="magemlm">
+                    <label>Ustawienia przekierowań</label>
+                    <frontend_type>textarea</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <magemlm_enable translate="label">
+                            <label>Blokuj kliknięcia z adresów IP: </label>
+                            <comment>Włączenie tej opcji spowoduje blokadę zliczania kliknięć z podanych adresów IP. </comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </magemlm_enable>
+                        <magemlm_iplist translate="label">
+                            <label>Adresy IP: </label>
+                            <comment>Wypisz adres'y IP, dla których system nie będzie przeprowadzał zliczenia kliknięć. Adresy powinny zostać rozdzielone średnikiem np.: 84.32.21.123;123.23.231.12</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </magemlm_iplist>
+                        <magemlm_time translate="label">
+                            <label>Czas (w sekundach) po którym nastąpi przekierowanie na stronę sklepu partnerskiego</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </magemlm_time>
+                        <magemlm_message translate="label">
+                            <label>Domyślny tekst podczas wyświetlania okna przekierowania</label>
+                            <comment></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>23</sort_order>
+                            <wysiwyg>1</wysiwyg>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </magemlm_message>
+                        
+                    </fields>
+                </magemlm_group>
+            
+            
+                <magemlm_customer translate="label2" module="magemlm">
+                    <label>Ustawienia użytkowników</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1001</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <magemlm_notlogged translate="label">
+                            <label>Zapisuj kliknięcia niezalogowanych użytkowników</label>
+                            <comment>Włączenie tej opcji spowoduje blokadę zliczania kliknięć niezalogowanych użytkowników</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </magemlm_notlogged>
+                        <magemlm_customer_perday translate="label">
+                            <label>Max. ilość kliknięć dziennie przez użytkownika (bądź z danego IP):</label>
+                            <comment>Podaj dodanię liczbę określającą ile maksymalnie kliknięć dziennie powinien system rejestrować dla konkretnego użytkownika. Pole puste, bądź równe zero oznacza brak limitu.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </magemlm_customer_perday>
+                        <magemlm_customer_perproduct translate="label">
+                            <label>Max. ilość kliknięć dziennie na konkretny produkt (bądź z danego IP)</label>
+                            <comment>Podaj dodanię liczbę określającą ile maksymalnie kliknięć na dany produkt dziennie, na użytkownika. Pole puste, bądź równe zero oznacza brak limitu.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </magemlm_customer_perproduct>                        
+                    </fields>
+                </magemlm_customer>
+            </groups>
+        </magemlm>
+    </sections>
+</config>

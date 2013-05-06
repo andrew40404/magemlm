@@ -1,0 +1,184 @@
+<config>
+    <modules>
+        <Qsolutions_Magemlm>
+            <version>0.1.2</version>
+        </Qsolutions_Magemlm>
+    </modules>
+    <global>
+        <models>
+            <magemlm>
+                <class>Qsolutions_Magemlm_Model</class>
+                <resourceModel>magemlm_resource</resourceModel>
+            </magemlm>
+            
+            <magemlm_resource>
+                <class>Qsolutions_Magemlm_Model_Resource</class>
+                <entities>
+                    <customer>
+                        <table>magemlm_customers</table>
+                    </customer>                
+                </entities>
+            </magemlm_resource>
+            
+        </models>
+        <blocks>
+            <magemlm>
+                <class>Qsolutions_Magemlm_Block</class>
+            </magemlm>
+        </blocks>
+        <helpers>
+            <magemlm>
+                <class>Qsolutions_Magemlm_Helper</class>
+            </magemlm>
+        </helpers>
+        
+        <resources>
+            <magemlm_setup>
+                <setup>
+                    <module>Qsolutions_Magemlm</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </magemlm_setup>
+        </resources>
+        
+        <events>
+            <controller_front_init_before>
+                <observers>
+                    <magemlm_observer>
+                        <class>magemlm/observer</class>
+                        <method>registerPartner</method>
+                    </magemlm_observer>
+                </observers>
+            </controller_front_init_before>
+        </events>
+        
+        <events>
+            <customer_save_after>
+                <observers>
+                    <magemlm_observer_save_customer>
+                        <type>singleton</type>
+                        <class>Qsolutions_Magemlm_Model_Observer</class>
+                        <method>saveCustomerMlmData</method>
+                    </magemlm_observer_save_customer>
+                </observers>
+            </customer_save_after>
+        </events>
+    </global>
+  
+    <admin>
+        <routers>
+            <magemlm>
+                <use>admin</use>
+                <args>
+                    <module>Qsolutions_Magemlm</module>
+                    <frontName>magemlm</frontName>
+                </args>
+            </magemlm>
+        </routers>
+        <layout>
+            <updates>
+                <magemlm>
+                    <file>magemlm.xml</file>
+                </magemlm>
+            </updates>
+        </layout>
+    </admin>
+  
+    <frontend>
+        <routers>
+            <magemlm>
+                <use>standard</use>
+                <args>
+                    <module>Qsolutions_Magemlm</module>
+                    <frontName>magemlm</frontName>
+                </args>
+            </magemlm>
+        </routers>
+        <layout>
+            <updates>
+                <magemlm>
+                    <file>magemlm.xml</file>
+                </magemlm>
+            </updates>
+        </layout>
+    </frontend>
+  
+    <adminhtml>
+        <menu>
+            <multilevel module="magemlm">
+                <title>Multilevel Settings</title>
+                <sort_order>100</sort_order>
+                <children>
+                    <magemlm translate="title" module="magemlm">
+                        <title>System configuration</title>
+                        <sort_order>999999</sort_order>
+                        <children>
+                            <magemlm module="magemlm">
+                                <sort_order>1</sort_order>
+                                <action>magemlm/adminhtml_products</action>
+                                <title>Configuration</title>
+                            </magemlm>
+                            <magemlmbestsellers module="magemlm">
+                                <sort_order>2</sort_order>
+                                <action>magemlm/adminhtml_bestsellers</action>
+                                <title>Partners Activity</title>
+                            </magemlmbestsellers>
+                        </children>
+                    </magemlm>
+                    <magemlmstructure module="magemlm">
+                        <sort_order>2</sort_order>
+                        <action>magemlm/adminhtml_structure</action>
+                        <title>Show structure</title>
+                    </magemlmstructure>
+                </children>
+            </multilevel>
+        </menu>
+        <layout>
+            <updates>
+                <magemlm>
+                    <file>magemlm.xml</file>
+                </magemlm>
+            </updates>
+        </layout>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <sales>
+                            <children>
+                                <magemlm>
+                                    <title>Qsolutions_Magemlm</title>
+                                </magemlm>
+                            </children>
+                        </sales>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <magemlm>
+                                            <title>Qsolutions_Magemlm Config</title>
+                                        </magemlm>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+            <modules>
+                <Qsolutions_Magemlm>
+                    <files>
+                        <default>Qsolutions_Magemlm.csv</default>
+                    </files>
+                </Qsolutions_Magemlm>
+            </modules>
+        </translate>
+	
+    </adminhtml>
+
+</config>
