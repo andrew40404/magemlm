@@ -1,4 +1,4 @@
 magemlm
-=======
+============
 
-Magento MultilevelMarketing module
+Magemlm - Magento
