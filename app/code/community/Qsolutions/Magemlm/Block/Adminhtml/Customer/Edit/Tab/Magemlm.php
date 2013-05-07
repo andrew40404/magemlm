@@ -21,7 +21,6 @@ class Qsolutions_Magemlm_Block_Adminhtml_Customer_Edit_Tab_Magemlm
     }
     
     
-    
     public function __construct()
     {
         $this->setTemplate('magemlm/customer.phtml');

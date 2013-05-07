@@ -1,14 +1,10 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of Collectin
- *
- * @author altasar
+ * @category    Qsolutions
+ * @package     Magemlm
+ * @copyright   Copyright (c) 2013 Qsolutions Studio
+ * @author		Jakub Winkler
  */
 
 class Qsolutions_Magemlm_Model_Resource_Customer_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract {

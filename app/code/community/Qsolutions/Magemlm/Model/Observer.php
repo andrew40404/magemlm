@@ -1,12 +1,17 @@
 <?php
 
-
+/**
+ * @category    Qsolutions
+ * @package     Magemlm
+ * @copyright   Copyright (c) 2013 Qsolutions Studio
+ * @author		Jakub Winkler
+ */
+ 
 class Qsolutions_Magemlm_Model_Observer {
 
     public function __construct () {
         
-    }
-    
+    } // public function __construct () {
     
     public function registerPartner(Varien_Event_Observer $observer) {
         
@@ -17,10 +22,9 @@ class Qsolutions_Magemlm_Model_Observer {
     
     } // public function registerPartner($observer) {
     
-    
     public function saveCustomerMlmData(Varien_Event_Observer $observer) {
         
-        $customer   = $observer->getEvent()->getCustomer();
+		$customer   = $observer->getEvent()->getCustomer();
         $customerId = $customer->getId();
         $referrerId = Mage::app()->getRequest()->getPost('magemlm_referrer');
         
@@ -48,14 +52,13 @@ class Qsolutions_Magemlm_Model_Observer {
                 $customerMagemlm->setMagemlmImage($fileName);
                 $customerMagemlm->save();
 
-            }catch(Exception $e) {
-                
-        } 
-      } else {
-          $customerMagemlm->setCustomerId($customerId);
-          $customerMagemlm->setReffererId($referrerId);
-          $customerMagemlm->save();   
-      }
+            	} catch(Exception $e) {
+        	} 
+       } else {
+          	$customerMagemlm->setCustomerId($customerId);
+          	$customerMagemlm->setReferrerId($referrerId);
+          	$customerMagemlm->save();   
+      	}
         
         // $event          = $observer->getEvent();
     } // public function registerPartner($observer) {
@@ -63,6 +66,6 @@ class Qsolutions_Magemlm_Model_Observer {
     
     public function getCustomer() {
         return Mage::registry('customer');
-    }
+    } // public function getCustomer() {
     
 }

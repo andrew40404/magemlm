@@ -1,10 +1,10 @@
 <?php
 
-/*
- *  Qsolutions_SnowExporter_Adminhtml_ExportController
- *
- * 	Controller responsible for handling the grid actions
- *  @author Qsolutions
+/**
+ * @category    Qsolutions
+ * @package     Magemlm
+ * @copyright   Copyright (c) 2013 Qsolutions Studio
+ * @author 		Jakub Winkler
  */
 
 class Qsolutions_Magemlm_Adminhtml_StructureController extends Mage_Adminhtml_Controller_Action {

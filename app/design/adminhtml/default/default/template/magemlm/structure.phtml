@@ -1,46 +1,57 @@
+<?php $stores = Mage::getModel('core/store') -> getCollection() -> toOptionHash(); ?>
+<p class="switcher">
+	<label for="store_switcher"><?php echo $this->__('Show structure for store view:')?></label>
+	<select name="magemlm_stores" id="magemlm_stores" style="width:150px;">
+		<?php foreach ($stores as $key => $store) : ?>
+    	<option value="<?php echo $key ?>"><?php echo $store ?></option>
+    	<?php endforeach ; ?>
+    </select>
+</p>
+
 <script>
-    jQuery(document).ready(function() {
-        jQuery("#org").jOrgChart({
-            chartElement : '#chart',
-            dragAndDrop : true
-        });
-    });
+	jQuery(document).ready(function() {
+		jQuery("#org").jOrgChart({
+			chartElement : '#chart',
+			dragAndDrop : true
+		});
+	});
 </script>
-<?php // create collectio //
 
-    function displayStructure ($refferalId) {
-        
-        $collection       = Mage::getModel('magemlm/customer')->getCollection()->addFieldToFilter('refferer_id' , array ('eq' => $refferalId));
-        $structureHTML    = 'some text';
-        
-        if ($collection->count() > 0) {
-            echo '<ul>' ;
-            foreach ($collection as $customer) {
-                echo '<li>' ;
-                $image           = Mage::getBaseUrl('media') . DS . 'magemlm' . DS  . $customer->getMagemlmImage();
-                echo '<img src="'. $image . '" width="60px" /> ';
-                displayStructure ($customer->getCustomerId());
-                echo '</li>' ;
-            }
-            echo  '</ul>';
-        }
-        
-    }
-   
+<?php
+
+	function displayStructure($referralId) {
+		$collection = Mage::getModel('magemlm/customer')->getCollection()->addFieldToFilter('referrer_id', array('eq' => $referralId));
+
+		if ($collection -> count() > 0) {
+			echo '<ul>';
+			foreach ($collection as $customer) {
+				echo '<li>';
+				$image = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . $customer -> getMagemlmImage();
+				echo '<img src="' . $image . '" width="60px" /> ';
+				displayStructure($customer -> getCustomerId());
+				echo '</li>';
+			}
+			echo '</ul>';
+		}
+	}
 ?>
- <ul id="org" style="display:none;">
-    <li>
-       <?php echo Mage::app()->getStore()->getName() ; ?>
-       <?php displayStructure(0); ?>
-    </li>
-    
-</ul> 
 
+<ul id="org" style="display:none;">
+	<li>
+		<?php echo Mage::app() -> getStore() -> getName(); ?>
+		<?php displayStructure('store_1'); ?>
+	</li>
+</ul>
 
 <div id="chart" class="orgChart"></div>
 
 <script>
-        jQuery(document).ready(function() {            
-            jQuery('#list-html').text(jQuery('#org').html());
-        });
+	jQuery(document).ready(function() {
+		jQuery('#list-html').text(jQuery('#org').html());
+	});
+	
+	Event.observe($("magemlm_stores"),'change', function(){
+		// alert($("magemlm_stores").value);
+		// window.location.href = "http://www.onet.pl";
+	});
 </script>

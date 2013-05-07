@@ -1,11 +1,12 @@
 <?php
-/**
-     * Qsolutions MageMLM extension
-     *
-     * @package    MageMLM
-     * @author     Jakub Winkler <office@qsolutions.com.pl>
-     */
 
+/**
+ * @category    Qsolutions
+ * @package     Magemlm
+ * @copyright   Copyright (c) 2013 Qsolutions Studio
+ * @author		Jakub Winkler
+ */
+ 
 $installer = $this;
 $installer->startSetup();
 

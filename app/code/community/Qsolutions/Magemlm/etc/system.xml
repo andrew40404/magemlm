@@ -3,8 +3,8 @@
     /**
      * Sellektor Redirect Module
      *
-     * @category   Sellektor
-     * @package    Redirect
+     * @category   Qsolutions
+     * @package    Magemlm
      * @author     Jakub Winkler <jakub.winkler@gmail.com>
      */
 -->
@@ -70,10 +70,8 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </magemlm_message>
-                        
                     </fields>
                 </magemlm_group>
-            
             
                 <magemlm_customer translate="label2" module="magemlm">
                     <label>Ustawienia użytkowników</label>
