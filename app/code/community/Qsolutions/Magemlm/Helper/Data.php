@@ -8,6 +8,22 @@
  
 class Qsolutions_Magemlm_Helper_Data 
     extends Mage_Core_Helper_Abstract {
-    
+
+	public function getCustomerName ($customerId) {
+		$customerModel = Mage::getModel('customer/customer')->load($customerId);
+		return $customerModel->getName();
+	}
+	
+	
+	public function getCustomerGender ($customerId) {
+		$customerModel = Mage::getModel('customer/customer')->load($customerId);
+		return $customerModel->getGender();		
+	}
+	
+	
+	public function getCustomerImage ($custemerId) {
+		$customerMlmModel = Mage::getModel('magemlm/customer')->load($custemerId , 'customer_id');
+		return $customerMlmModel->getMagemlmImage();
+	}
 
 }

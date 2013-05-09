@@ -8,22 +8,34 @@
             <action method="addJs"><js>jquery/jquery.jOrgChart.js</js></action>
             <action method="addCss"><css>magemlm.css</css></action>
         </reference>
-   </default>
+   	</default>
    
-   <adminhtml_customer_edit>
+   	<adminhtml_customer_edit>
         <reference name="customer_edit_tabs">
-            <action method="addTab"><name>customer_edit_tab_magemlm</name><block>magemlm/adminhtml_customer_edit_tab_magemlm</block></action>
+            <action method="addTab">
+            	<name>customer_edit_tab_magemlm</name>
+            	<block>magemlm/adminhtml_customer_edit_tab_magemlm</block>
+            	</action>
         </reference>
-   </adminhtml_customer_edit>
+   	</adminhtml_customer_edit>
+   
+    <!-- <adminhtml_catalog_product_edit>
+        <reference name="product_tabs">
+            <action method="addTab">
+            	<name>customer_edit_tab_magemlm</name>
+            	<block>magemlm/adminhtml_customer_edit_tab_magemlm</block>
+           	</action>
+        </reference>
+	</adminhtml_catalog_product_edit> -->
 
-   <magemlm_adminhtml_structure_index>
+   	<magemlm_adminhtml_structure_index>
         <reference name="content">
-            <block type="magemlm/adminhtml_reports_products_form" name="productForm">
-                <action method="setTemplate">
-                    <template>magemlm/structure.phtml</template>
+           	<block type="magemlm/adminhtml_magemlm_structure" name="structure">
+            	<action method="setTemplate">
+                	<template>magemlm/structure.phtml</template>
                 </action>
             </block>
         </reference>
-   </magemlm_adminhtml_structure_index>
+   	</magemlm_adminhtml_structure_index>
     
 </layout>

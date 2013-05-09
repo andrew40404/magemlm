@@ -23,9 +23,8 @@ class Qsolutions_Magemlm_Block_Adminhtml_Customer_Edit_Tab_Magemlm
     
     public function __construct()
     {
-        $this->setTemplate('magemlm/customer.phtml');
-        $this->_customer  = $this->getCustomer();
- 
+        parent::_construct();
+		$this->setTemplate('magemlm/customer.phtml'); 
     }
  
  
@@ -56,8 +55,7 @@ class Qsolutions_Magemlm_Block_Adminhtml_Customer_Edit_Tab_Magemlm
      */
     public function canShowTab()
     {
-        $customer = Mage::registry('current_customer');
-        return (bool)$customer->getId();
+        return true;
     }
  
     /**

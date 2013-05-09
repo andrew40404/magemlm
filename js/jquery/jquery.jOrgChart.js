@@ -105,6 +105,7 @@
   var nodeCount = 0;
   // Method that recursively builds the tree
   function buildNode(jQuerynode, jQueryappendTo, level, opts) {
+  	var elementId 	= (jQuerynode.attr('id'));
     var jQuerytable = jQuery("<table cellpadding='0' cellspacing='0' border='0' id='magemlm_structure'/>");
     var jQuerytbody = jQuery("<tbody/>");
 
@@ -130,6 +131,7 @@
    jQuerynode.data("tree-node", nodeCount);
    jQuerynodeDiv = jQuery("<div>").addClass("node")
                                      .data("tree-node", nodeCount)
+                                     .attr('id',  "customer_"+elementId)
                                      .append(jQuerynodeContent);
 
     // Expand and contract nodes

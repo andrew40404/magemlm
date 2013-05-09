@@ -6,6 +6,7 @@
     </modules>
     
     <global>
+    	<!-- models -->
         <models>
             <magemlm>
                 <class>Qsolutions_Magemlm_Model</class>
@@ -22,18 +23,21 @@
             </magemlm_resource>
         </models>
         
+        <!-- block -->
         <blocks>
             <magemlm>
                 <class>Qsolutions_Magemlm_Block</class>
             </magemlm>
         </blocks>
         
+        <!-- helper -->
         <helpers>
             <magemlm>
                 <class>Qsolutions_Magemlm_Helper</class>
             </magemlm>
         </helpers>
         
+        <!-- resources -->
         <resources>
             <magemlm_setup>
                 <setup>
@@ -46,6 +50,7 @@
             </magemlm_setup>
         </resources>
         
+        <!-- observers -->
         <events>
             <controller_front_init_before>
                 <observers>
@@ -91,6 +96,7 @@
     </admin>
   
     <frontend>
+    	<!-- controllers -->
         <routers>
             <magemlm>
                 <use>standard</use>
@@ -100,6 +106,8 @@
                 </args>
             </magemlm>
         </routers>
+        
+        <!-- layour update -->
         <layout>
             <updates>
                 <magemlm>
@@ -107,9 +115,21 @@
                 </magemlm>
             </updates>
         </layout>
+        
+        <!-- translation -->
+        <translate>
+            <modules>
+                <magemlm>
+                    <files>
+                        <default>Qsolutions_magemlm.csv</default>
+                    </files>
+                </magemlm>
+            </modules>
+        </translate>
     </frontend>
   
     <adminhtml>
+    	<!-- translation -->
     	<translate>
             <modules>
                 <magemlm>
@@ -120,6 +140,7 @@
             </modules>
         </translate>
         
+        <!-- admin menu -->
         <menu>
             <multilevel module="magemlm">
                 <title>Multilevel Settings</title>
@@ -149,6 +170,7 @@
                 </children>
             </multilevel>
         </menu>
+        <!-- layout update -->
         <layout>
             <updates>
                 <magemlm>
@@ -182,6 +204,7 @@
                 </admin>
             </resources>
         </acl>
+        <!-- translation -->
         <translate>
             <modules>
                 <Qsolutions_Magemlm>
