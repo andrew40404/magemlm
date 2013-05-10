@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+	
+	<default> 
+        <reference name="head">
+            <!-- this works --> 
+            <action method="addJs"><js>jquery/jquery-1.9.1.js</js></action>
+            <action method="addJs"><js>jquery/jquery.jOrgChart.js</js></action>
+            <action method="addCss"><css>css/magemlm.css</css></action>
+        </reference>
+   	</default>
+	
+	<customer_account>
+		<reference name="customer_account_navigation">
+			<action method="addLink" translate="label" module="magemlm">
+				<name>magemlm_structure</name>
+				<path>magemlm/customer/view</path>
+				<label>My structure</label>
+			</action>
+			<action method="addLink" translate="label" module="magemlm">
+				<name>magemlm_settings</name>
+				<path>magemlm/customer/config</path>
+				<label>My MLM profile</label>
+			</action>
+		</reference>
+	</customer_account>
+	
+	<magemlm_customer_view>
+		<update handle="customer_account"/>
+		<reference name="content">
+			<block type="magemlm/customer_structure"      name="view.magemlm.structure" template="magemlm/structure.phtml"/>
+			<block type="magemlm/customer_structure_menu" name="magemlm.structure.menu"  as="structure.menu" />
+		</reference>
+		
+		<!-- <reference name="root">
+        	<action method="setTemplate"><template>magemlm/structure/page/structure.phtml</template></action>
+    	</reference> -->
+	</magemlm_customer_view>
+	
+	<magemlm_customer_config>
+		<update handle="customer_account"/>
+		<reference name="content">
+			<block type="magemlm/customer_profile" name="view.magemlm.profile" />
+		</reference>
+	</magemlm_customer_config>
+	
+</layout>
