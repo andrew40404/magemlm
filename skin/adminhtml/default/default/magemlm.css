@@ -71,7 +71,6 @@
     border-left         : 1px solid #444;
 }
 
-/* node cell */
 #magemlm_structure td {
     text-align          : center;
     vertical-align      : top;
@@ -81,14 +80,26 @@
 /* The node */
 #magemlm_structure .node {
     
-    background: url("images/filter_row_bg.gif") repeat-x scroll 0 0 #E3EFF1;
+    background 			: #FBFAF6;
     display             : inline-block;
-    width               : 80px;
-    height              : 80px;
+    width               : 90px;
+    min-height			: 105px;
     z-index             : 10;
     margin-left         : 2px;
     margin-right        : 2px;
-    padding             : 0px;
+    font-size           : 12px;
+    border 				: 1px solid silver;
+    color 				: #555;
+    padding:			0px;
+}
+
+.node .magemlm_name {
+	background-color 	: silver;
+	font-weight 		: bold;
+	margin-bottom 		: 3px;
+	color 				: white;
+	height				: 40px;
+	background: url("../images/bkg_block-title-account.gif") repeat-x scroll 0 100% #FC9D36;
 }
 
 

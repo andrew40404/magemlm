@@ -1,7 +1,7 @@
 <config>
     <modules>
         <Qsolutions_Magemlm>
-            <version>0.1.5</version>
+            <version>0.1.4</version>
         </Qsolutions_Magemlm>
     </modules>
     
@@ -18,7 +18,13 @@
                 <entities>
                     <customer>
                         <table>magemlm_customers</table>
-                    </customer>                
+                    </customer>
+                    <unilevel>
+                    	<table>magemlm_unilevel</table>
+                    </unilevel>
+                    <commissions>
+                    	<table>magemlm_commissions</table>
+                    </commissions>
                 </entities>
             </magemlm_resource>
         </models>
@@ -52,18 +58,25 @@
         
         <!-- observers -->
         <events>
+        	<customer_register_success>
+        		<observers>
+                    <magemlm_observer>
+                        <class>magemlm/observer</class>
+                        <method>registerCustomer</method>
+                    </magemlm_observer>
+                </observers>
+        	</customer_register_success>
+        	
             <controller_front_init_before>
                 <observers>
                     <magemlm_observer>
                         <class>magemlm/observer</class>
-                        <method>registerPartner</method>
+                        <method>getLink</method>
                     </magemlm_observer>
                 </observers>
             </controller_front_init_before>
-        </events>
-        
-        <events>
-            <customer_save_after>
+            
+            <adminhtml_customer_save_after>
                 <observers>
                     <magemlm_observer_save_customer>
                         <type>singleton</type>
@@ -71,7 +84,18 @@
                         <method>saveCustomerMlmData</method>
                     </magemlm_observer_save_customer>
                 </observers>
-            </customer_save_after>
+            </adminhtml_customer_save_after>
+            
+            <checkout_onepage_controller_success_action>
+            	<observers>
+                    <magemlm_observer_compensation_plan>
+                        <type>singleton</type>
+                        <class>Qsolutions_Magemlm_Model_Observer</class>
+                        <method>saveCompensation</method>
+                    </magemlm_observer_compensation_plan>
+                </observers>
+            </checkout_onepage_controller_success_action>
+            
         </events>
     </global>
   
@@ -116,7 +140,7 @@
             </updates>
         </layout>
         
-        <!-- translation -->
+        <!-- frontend translation -->
         <translate>
             <modules>
                 <magemlm>
@@ -129,7 +153,7 @@
     </frontend>
   
     <adminhtml>
-    	<!-- translation -->
+    	<!-- adminhtml translation -->
     	<translate>
             <modules>
                 <magemlm>
@@ -146,27 +170,26 @@
                 <title>Multilevel Settings</title>
                 <sort_order>100</sort_order>
                 <children>
-                    <!-- <magemlm translate="title" module="magemlm">
+                    <magemlm_unilevel translate="title" module="magemlm">
                     	<sort_order>1</sort_order>
-                        <title>System configuration</title>
-                        <sort_order>999999</sort_order>
-                        <children>
-                            <magemlm module="magemlm">
-                                <sort_order>1</sort_order>
-                                <action>magemlm/adminhtml_products</action>
-                                <title>Configuration</title>
-                            </magemlm>
-                            <magemlmbestsellers module="magemlm">
-                                <sort_order>2</sort_order>
-                                <action>magemlm/adminhtml_bestsellers</action>
-                                <title>Partners Activity</title>
-                            </magemlmbestsellers>
-                        </children>
-                    </magemlm> -->
+                        <title>Unilevel Commission Plan</title>
+                        <action>magemlm/adminhtml_unilevel</action>
+                    </magemlm_unilevel> -->
                     <magemlmstructure module="magemlm">
+                    	<sort_order>2</sort_order>
                         <action>magemlm/adminhtml_structure</action>
                         <title>Show structure</title>
                     </magemlmstructure>
+                    <magemlmsconfig module="magemlm">
+                    	<sort_order>4</sort_order>
+                        <action>adminhtml/system_config/edit/section/magemlm</action>
+                        <title>Configuration</title>
+                    </magemlmsconfig>
+                    <magemlm_report module="magemlm">
+                    	<sort_order>3</sort_order>
+                        <action>adminhtml/system_config/edit/section/magemlm</action>
+                        <title>Commission Report</title>
+                    </magemlm_report>
                 </children>
             </multilevel>
         </menu>
@@ -204,15 +227,5 @@
                 </admin>
             </resources>
         </acl>
-        <!-- translation -->
-        <translate>
-            <modules>
-                <Qsolutions_Magemlm>
-                    <files>
-                        <default>Qsolutions_Magemlm.csv</default>
-                    </files>
-                </Qsolutions_Magemlm>
-            </modules>
-        </translate>
     </adminhtml>
 </config>

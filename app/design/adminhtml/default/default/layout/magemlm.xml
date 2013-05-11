@@ -37,5 +37,18 @@
             </block>
         </reference>
    	</magemlm_adminhtml_structure_index>
+   	
+   	<magemlm_adminhtml_unilevel_index>
+        <reference name="content">
+            <block type="magemlm/adminhtml_unilevel" name="unilevel" as="unilevel" />
+        </reference>
+    </magemlm_adminhtml_unilevel_index>
+    
+    
+    <magemlm_adminhtml_unilevel_edit>
+        <reference name="content">
+            <block type="magemlm/adminhtml_unilevel_edit" name="unilevel.edit" as="unilevel.edit" />
+        </reference>
+    </magemlm_adminhtml_unilevel_edit>
     
 </layout>

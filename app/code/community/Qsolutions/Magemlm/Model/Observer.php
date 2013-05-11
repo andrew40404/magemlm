@@ -13,13 +13,12 @@ class Qsolutions_Magemlm_Model_Observer {
         
     } // public function __construct () {
     
-    public function registerPartner(Varien_Event_Observer $observer) {
+    public function getLink(Varien_Event_Observer $observer) {
         
-        $affiliateId     = Mage::getSingleton('core/session')->getAffiliateId();
-        if ($affiliateId == NULL ) { 
-            Mage::getSingleton('core/session')->setAffiliateId('some value') ; 
-        }
-    
+		if (isset ($_GET['refId']) ) {
+			$cookie = Mage::getSingleton('core/cookie');
+			$cookie->set('refId', $_GET['refId'] ,time()+86400,'/');
+		}
     } // public function registerPartner($observer) {
     
     public function saveCustomerMlmData(Varien_Event_Observer $observer) {
@@ -59,13 +58,40 @@ class Qsolutions_Magemlm_Model_Observer {
           	$customerMagemlm->setReferrerId($referrerId);
           	$customerMagemlm->save();   
       	}
+    }
+
+
+	public function registerCustomer (Varien_Event_Observer $observer) {
         
-        // $event          = $observer->getEvent();
-    } // public function registerPartner($observer) {
+		$customer   = $observer->getEvent()->getCustomer();
+        $customerId = $customer->getId();
+        $referrerId = Mage::getSingleton('core/cookie')->get('refId');
+		
+        $customerMagemlm   = Mage::getModel('magemlm/customer')->load($customerId , 'customer_id');
+
+       	$customerMagemlm->setCustomerId($customerId);
+       	$customerMagemlm->setReferrerId($referrerId);
+      	$customerMagemlm->save();   
+    }
+    		
+    	
     
     
     public function getCustomer() {
         return Mage::registry('customer');
     } // public function getCustomer() {
+    	
+    		
+    // observer function to get Compensation data
+    public function saveCompensation(Varien_Event_Observer $observer) {
+    	
+		$order 		= new Mage_Sales_Model_Order();
+    	$orderId  	= Mage::getSingleton('checkout/session')->getLastRealOrderId();
+		$order->loadByIncrementId($orderId);
+		
+		$orderPriceExldTax 	= $order->getBaseSubtotal(); // calculate commission for price WITHOUT TAX 
+		Mage::getModel('magemlm/commissions')->calculateCommissions(Mage::helper('customer')->getCustomer()->getId() , $orderId, $orderPriceExldTax);
+		
+    }
     
 }

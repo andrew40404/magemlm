@@ -38,5 +38,14 @@ class Qsolutions_Magemlm_CustomerController extends Mage_Core_Controller_Front_A
                 ->renderLayout();
 	}
 	
+	public function commissionsAction () {
+		$this->_initAction()
+                ->renderLayout();
+	}
+	
+	public function planAction () {
+		$this->_initAction()
+                ->renderLayout();
+	}
 
 }

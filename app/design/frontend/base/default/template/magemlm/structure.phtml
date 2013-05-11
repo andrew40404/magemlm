@@ -3,9 +3,10 @@
  * 
  */ 
  ?>
- <div class="page-title">
+<div class="page-title">
 	<h1><?php echo $this->__('My structure'); ?></h1>
 </div>
+
 <?php
 
 	function displayStructure($referralId) {
@@ -14,31 +15,34 @@
 		if ($collection -> count() > 0) {
 			echo '<ul>';
 			foreach ($collection as $customer) {
-				echo '<li id="' . $customer->getCustomerId() . '">';
-				$image =  Mage::helper('magemlm')->getCustomerImage($customer->getCustomerId());
-				
-				if ($image == '' ) {
-					$customerModel 	= Mage::getModel('customer/customer')->load($customer->getCustomerId());
-					$gender			= $customerModel->getGender();
-					// var_dump($gender);
+				if (Mage::helper('magemlm')->customerExists($customer->getCustomerId())) {
 					
-					if ($gender == '124') {
-						$genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'female.png';
-					} else if ($gender == '123' ) {
-						$genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'male.png';
-					} else {
+					echo '<li id="' . $customer->getCustomerId() . '">';
+					$image =  Mage::helper('magemlm')->getCustomerImage($customer->getCustomerId());
+					
+					if ($image == '' ) {
+						$customerModel 	= Mage::getModel('customer/customer')->load($customer->getCustomerId());
+						$gender			= $customerModel->getGender();
+						// var_dump($gender);
 						
+						if ($gender == '124') {
+							$genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'female.png';
+						} else if ($gender == '123' ) {
+							$genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'male.png';
+						} else {
+							
+						}
+						$image = $genderImg;
+					} else {
+						$image = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . $image;
 					}
-					$image = $genderImg;
-				} else {
-					$image = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . $image;
+					
+					echo '<div class="magemlm_name">' . Mage::helper('magemlm')->getCustomerName($customer->getCustomerId()) . '</div>';
+					echo '<img src="' . $image . '" height="80px" class="node_img" /><br /> ';
+					
+					displayStructure($customer -> getCustomerId());
+					echo '</li>';
 				}
-				
-				echo '<div class="magemlm_name">' . Mage::helper('magemlm')->getCustomerName($customer->getCustomerId()) . '</div>';
-				echo '<img src="' . $image . '" width="60px" class="node_img" /><br /> ';
-				
-				displayStructure($customer -> getCustomerId());
-				echo '</li>';
 			}
 			echo '</ul>';
 		}

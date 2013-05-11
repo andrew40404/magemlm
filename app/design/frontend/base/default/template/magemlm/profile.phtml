@@ -2,16 +2,60 @@
  * Profile template for frontend
  * 
  */ 
- ?>
+?>
  <div class="page-title">
 	<h1><?php echo $this->__('My MLM  profile'); ?></h1>
 </div>
 
-	<div class="fieldset magemlm-left">
-		<h2 class="legend"><?php echo $this->__('Referral Link') ?></h2>
-	    <p><Strong>Some very nice referral link</Strong></p>
-	 </div>
+
+<div class="fieldset magemlm-full">
+	<h2 class="legend"><?php echo $this->__('Referral Link') ?></h2>
+    <p>
+    	<a href="<?php echo Mage::getModel('magemlm/referrallink')->link(Mage::helper('customer')->getCustomer()->getId()); ?>">
+    		<?php echo Mage::getModel('magemlm/referrallink')->link(Mage::helper('customer')->getCustomer()->getId()); ?>
+    	</a>
+    </p>
+</div>
 	 
+
+<div class="fieldset magemlm-left" style="clear: both;">
+	<h2 class="legend"><?php echo $this->__('Structure Data') ?></h2>
+    <table id="my-orders-table" class="data-table">
+    <colgroup>
+    	<col width="1">
+    	<col width="1">
+    </colgroup>
+    	<thead>
+            <tr class="first last">
+                <th>Data</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="first odd">
+                <td><?php echo $this->__('Frontline: '); ?></td>
+                <td><span class="nobr"><?php echo Mage::helper('magemlm')->getFrontlineCount(Mage::helper('customer')->getCustomer()->getId()) ?> </span></td>
+            </tr>
+            <tr class="even">
+                <td><?php echo $this->__('Structure Depth: '); ?></td>
+                <?php 
+                	$depthMdl = Mage::helper('magemlm');
+					$depthMdl->structureDepth(Mage::helper('customer')->getCustomer()->getId());
+					$depth = $depthMdl->maxDepth;
+				?>
+                <td><span class="nobr"><?php echo $depth ?></span></td>
+            </tr>
+            <tr class="first last odd">
+                <td><?php echo $this->__('Structure Count: '); ?></td>
+                <td><span class="nobr"><?php echo Mage::helper('magemlm')->structureCount(Mage::helper('customer')->getCustomer()->getId()) ?></span></td>
+            </tr>
+        </tbody>
+ </table>
+</div>
+
+
+
+
 <div class="fieldset magemlm-right">
 	<h2 class="legend"><?php echo $this->__('Your image') ?></h2>
 	<?php $customerMagemlm 	= Mage::getModel('magemlm/customer')->load(Mage::helper('customer')->getCustomer()->getId(), 'customer_id'); ?>
@@ -25,27 +69,26 @@
 	</p>
 </div>
 
-	<div class="fieldset magemlm-full" style="clear: both;">
-		<h2 class="legend"><?php echo $this->__('Structure Data') ?></h2>
-        <table id="my-orders-table" class="data-table">
+
+<div class="fieldset magemlm-left">
+	<h2 class="legend"><?php echo $this->__('Commission Data') ?></h2>
+    <table id="my-orders-table" class="data-table">
     <colgroup>
     	<col width="1">
     	<col width="1">
     </colgroup>
     	<thead>
             <tr class="first last">
-                <th>Data</th>
+                <th>Type</th>
                 <th>Value</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="first last odd">
-                <td>100000001</td>
-                <td><span class="nobr">5/1/13</span></td>
+            <tr class="first odd">
+                <td><?php echo $this->__('Total earnings: '); ?></td>
+                <?php $totalCommission = Mage::getModel('magemlm/commissions')->getCommissionSummary(Mage::helper('customer')->getCustomer()->getId()); ?>
+                <td><span class="nobr"><?php echo Mage::helper('core')->currency($totalCommission, true, false) ?> </span></td>
             </tr>
         </tbody>
  </table>
 </div>
-
-
-

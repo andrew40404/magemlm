@@ -25,11 +25,34 @@
 		if ($collection -> count() > 0) {
 			echo '<ul>';
 			foreach ($collection as $customer) {
-				echo '<li>';
-				$image = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . $customer -> getMagemlmImage();
-				echo '<img src="' . $image . '" width="60px" /> ';
-				displayStructure($customer -> getCustomerId());
-				echo '</li>';
+				
+				if (Mage::helper('magemlm')->customerExists($customer->getCustomerId())) {
+					echo '<li id="' . $customer->getCustomerId() . '">';
+					$image =  Mage::helper('magemlm')->getCustomerImage($customer->getCustomerId());
+					
+					if ($image == '' ) {
+						$customerModel 	= Mage::getModel('customer/customer')->load($customer->getCustomerId());
+						$gender			= $customerModel->getGender();
+						// var_dump($gender);
+						
+						if ($gender == '124') {
+							$genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'female.png';
+						} else if ($gender == '123' ) {
+							$genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'male.png';
+						} else {
+							
+						}
+						$image = $genderImg;
+					} else {
+						$image = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . $image;
+					}
+					
+					echo '<div class="magemlm_name">' . Mage::helper('magemlm')->getCustomerName($customer->getCustomerId()) . '</div>';
+					echo '<img src="' . $image . '" height="80px" class="node_img" /><br /> ';
+					
+					displayStructure($customer -> getCustomerId());
+					echo '</li>';
+					}
 			}
 			echo '</ul>';
 		}

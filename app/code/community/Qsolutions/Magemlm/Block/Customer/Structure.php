@@ -8,6 +8,6 @@ class Qsolutions_Magemlm_Block_Customer_Structure extends Mage_Core_Block_Templa
 	  
     public function __construct() {  
         parent::__construct();  
-        
+        $this->setTemplate('magemlm/structure.phtml');
       }  
 }
