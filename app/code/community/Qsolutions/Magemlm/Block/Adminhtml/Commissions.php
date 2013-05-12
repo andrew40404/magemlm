@@ -1,5 +1,5 @@
-<?php 
- 
+<?php
+
 /**
  * Magemlm
  *
@@ -9,13 +9,17 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
  
-class Qsolutions_Magemlm_Block_Customer_Profile extends Mage_Core_Block_Template {
-	
+class Qsolutions_Magemlm_Block_Adminhtml_Commissions extends Mage_Adminhtml_Block_Template {
+    
+    protected $_addButtonLabel = 'Create new Unilevel Compensation Plan';
+
 	/**
      * Constructor. Set template.
      */
-    public function __construct() {  
+    public function __construct() {        
         parent::__construct();
-		$this->setTemplate("magemlm/profile.phtml") ;
-      }  
+		$this->setTemplate('magemlm/commissions/view.phtml');        
+    }
+
 }
+

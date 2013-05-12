@@ -1,9 +1,12 @@
 <?php
 
 /**
+ * Magemlm
+ *
  * @category    Qsolutions
- * @package     Magemlm
- * @copyright   Copyright (c) 2013 Qsolutions Studio
+ * @package     Qsolutions_Magemlm
+ * @copyright   Copyright (c) 2013 Q-Solutions  (http://www.qsolutions.com.pl)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
  
 class Qsolutions_Magemlm_Model_Commissions extends Mage_Core_Model_Abstract {
@@ -62,7 +65,7 @@ class Qsolutions_Magemlm_Model_Commissions extends Mage_Core_Model_Abstract {
 			if ($pos !== false)  {
 				break ; 
 			}
-			$customerArray[] = $customerId; // . " " . Mage::helper('magemlm')->getCustomerName($customerId).  "<br/>";
+			$customerArray[] = $customerId;
 		}
 		return $customerArray; 
 	}
@@ -85,12 +88,51 @@ class Qsolutions_Magemlm_Model_Commissions extends Mage_Core_Model_Abstract {
 	}
 
 
+	/**
+	 * @return double - commission count
+	 */
 	public function getCommissionSummary ($customerId) {
 		$resource 		= Mage::getSingleton('core/resource');
 		$readConnection = $resource->getConnection('core_read');
         $query 			= 'select SUM(commission_value) as sum from magemlm_commissions where customer_id = "'. $customerId . '" ';
         $result 		= $readConnection->fetchOne($query);
 		return $result;
+	}
+	
+	
+	public function calculateCommission ($yearMonth , $paid = 0) {
+		$resource 		= Mage::getSingleton('core/resource');
+		$readConnection = $resource->getConnection('core_read');
+        $query 			= ' select magemlm_commissions.customer_id as customer_id, 
+						       magemlm_commissions.created_at as created_at, 
+						       SUM(commission_value) as sum , 
+							CONCAT ( 
+							    (select value from customer_entity_varchar where customer_entity_varchar.entity_id = magemlm_commissions.customer_id and attribute_id = 1 limit 1) , " " , 
+							    (select value from customer_entity_varchar where customer_entity_varchar.entity_id = magemlm_commissions.customer_id and attribute_id = 2 limit 1)  
+							) as customerName ,
+							customer_entity.email as email, 
+							commission_status 
+							from magemlm_commissions
+							    join customer_entity on customer_entity.entity_id = magemlm_commissions.customer_id
+									where magemlm_commissions.created_at like "' . $yearMonth . '%" 
+										and magemlm_commissions.commission_status = "' . $paid . '" 
+											group by customer_id; ';
+		$result 		= $readConnection->fetchAll($query);
+		return 		$result;
+	}
+
+
+	public function payCommissions ($customerIdArray , $yearMonth) {
+		
+		foreach ($customerIdArray as $customerId) {
+			$resource 		 = Mage::getSingleton('core/resource');
+			$writeConnection = $resource->getConnection('core_read');
+			$query 			= 'update magemlm_commissions 
+									set magemlm_commissions.commission_status = "1" 
+    									where magemlm_commissions.customer_id = "' . $customerId . '" 
+         									and magemlm_commissions.created_at like "' . $yearMonth . '%"';
+			$writeConnection->query($query);
+		}
 	}
     
 }

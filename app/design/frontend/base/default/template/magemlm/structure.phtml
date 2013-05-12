@@ -55,9 +55,9 @@
 		<?php echo '<img src="' . Mage::getBaseUrl('media') . DS . 'magemlm' . DS . Mage::helper('magemlm')->getCustomerImage(Mage::helper('customer')->getCustomer()->getId()) . '" width="60px" class="node_img" /><br /> '; '</div>'; ?>
 		<?php displayStructure(Mage::helper('customer')->getCustomer()->getId()); ?>
 	</li>
-</ul>
+</ul> 
 
-<div id="chart" class="orgChart"></div>
+<div id="chart" class="orgChart" style="overflow: scroll;"></div>
 
 
 <script>

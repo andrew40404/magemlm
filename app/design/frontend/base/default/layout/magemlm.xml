@@ -3,7 +3,6 @@
 	
 	<default> 
         <reference name="head">
-            <!-- this works --> 
             <action method="addJs"><js>jquery/jquery-1.9.1.js</js></action>
             <action method="addJs"><js>jquery/jquery.jOrgChart.js</js></action>
             <action method="addCss"><css>css/magemlm.css</css></action>
@@ -39,12 +38,12 @@
 		<update handle="customer_account"/>
 		<reference name="content">
 			<block type="magemlm/customer_structure"      name="view.magemlm.structure"  as="magemlm.structure" />
-			<block type="magemlm/customer_structure_menu" name="magemlm.structure.menu"  as="structure.menu" />
+			<!-- <block type="magemlm/customer_structure_menu" name="magemlm.structure.menu"  as="structure.menu" /> --><!-- disable menu -->
 		</reference>
 		
-		<reference name="root">
+		<!-- <reference name="root">
         	<action method="setTemplate"><template>magemlm/structure/page/structure.phtml</template></action>
-    	</reference>
+    	</reference> -->
 	</magemlm_customer_view>
 	
 	<magemlm_customer_config>

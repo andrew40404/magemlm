@@ -178,16 +178,11 @@
                     <magemlmstructure module="magemlm">
                     	<sort_order>2</sort_order>
                         <action>magemlm/adminhtml_structure</action>
-                        <title>Show structure</title>
+                        <title>Show Entire Structure</title>
                     </magemlmstructure>
-                    <magemlmsconfig module="magemlm">
-                    	<sort_order>4</sort_order>
-                        <action>adminhtml/system_config/edit/section/magemlm</action>
-                        <title>Configuration</title>
-                    </magemlmsconfig>
                     <magemlm_report module="magemlm">
                     	<sort_order>3</sort_order>
-                        <action>adminhtml/system_config/edit/section/magemlm</action>
+                        <action>magemlm/adminhtml_commissions</action>
                         <title>Commission Report</title>
                     </magemlm_report>
                 </children>

@@ -1,14 +1,15 @@
 <?php
 
 /**
+ * Magemlm
+ *
  * @category    Qsolutions
- * @package     Magemlm
- * @copyright   Copyright (c) 2013 Qsolutions Studio
- * @author		Jakub Winkler
+ * @package     Qsolutions_Magemlm
+ * @copyright   Copyright (c) 2013 Q-Solutions  (http://www.qsolutions.com.pl)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
  
 class Qsolutions_Magemlm_Model_Resource_Commissions extends Mage_Core_Model_Resource_Db_Abstract {
-    //put your code here
     
     protected function _construct()
     {

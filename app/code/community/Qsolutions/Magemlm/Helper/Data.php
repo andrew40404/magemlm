@@ -1,9 +1,12 @@
 <?php
 
 /**
+ * Magemlm
+ *
  * @category    Qsolutions
- * @package     Magemlm
- * @copyright   Copyright (c) 2013 Qsolutions Studio
+ * @package     Qsolutions_Magemlm
+ * @copyright   Copyright (c) 2013 Q-Solutions  (http://www.qsolutions.com.pl)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
  
 class Qsolutions_Magemlm_Helper_Data 
@@ -161,5 +164,6 @@ class Qsolutions_Magemlm_Helper_Data
 		$customerMlmModel = Mage::getModel('magemlm/customer')->getCollection()->addFieldToFilter('referrer_id' , array ('eq' => $customerId));
 		return ($customerMlmModel->count() > 0 ? true : false);
 	}
+	
 	
 }

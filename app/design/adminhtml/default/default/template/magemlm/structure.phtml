@@ -1,18 +1,10 @@
 <?php $stores = Mage::getModel('core/store') -> getCollection() -> toOptionHash(); ?>
-<p class="switcher">
-	<label for="store_switcher"><?php echo $this->__('Show structure for store view:')?></label>
-	<select name="magemlm_stores" id="magemlm_stores" style="width:150px;">
-		<?php foreach ($stores as $key => $store) : ?>
-    	<option value="<?php echo $key ?>"><?php echo $store ?></option>
-    	<?php endforeach ; ?>
-    </select>
-</p>
 
 <script>
 	jQuery(document).ready(function() {
 		jQuery("#org").jOrgChart({
 			chartElement : '#chart',
-			dragAndDrop : true
+			dragAndDrop : false
 		});
 	});
 </script>

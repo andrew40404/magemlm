@@ -2,8 +2,7 @@
 <layout version="0.1.0">
     
     <default> 
-        <reference name="head">
-            <!-- this works --> 
+        <reference name="head"> 
             <action method="addJs"><js>jquery/jquery-1.9.1.js</js></action>
             <action method="addJs"><js>jquery/jquery.jOrgChart.js</js></action>
             <action method="addCss"><css>magemlm.css</css></action>
@@ -18,15 +17,6 @@
             	</action>
         </reference>
    	</adminhtml_customer_edit>
-   
-    <!-- <adminhtml_catalog_product_edit>
-        <reference name="product_tabs">
-            <action method="addTab">
-            	<name>customer_edit_tab_magemlm</name>
-            	<block>magemlm/adminhtml_customer_edit_tab_magemlm</block>
-           	</action>
-        </reference>
-	</adminhtml_catalog_product_edit> -->
 
    	<magemlm_adminhtml_structure_index>
         <reference name="content">
@@ -50,5 +40,12 @@
             <block type="magemlm/adminhtml_unilevel_edit" name="unilevel.edit" as="unilevel.edit" />
         </reference>
     </magemlm_adminhtml_unilevel_edit>
+    
+    
+    <magemlm_adminhtml_commissions_index>
+        <reference name="content">
+            <block type="magemlm/adminhtml_commissions" name="commissions.view" as="commissions.view" />
+        </reference>
+    </magemlm_adminhtml_commissions_index>
     
 </layout>

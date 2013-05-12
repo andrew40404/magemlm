@@ -1,10 +1,12 @@
 <?php
 
 /**
+ * Magemlm
+ *
  * @category    Qsolutions
- * @package     Magemlm
- * @copyright   Copyright (c) 2013 Qsolutions Studio
- * @author 		Jakub Winkler
+ * @package     Qsolutions_Magemlm
+ * @copyright   Copyright (c) 2013 Q-Solutions  (http://www.qsolutions.com.pl)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 class Qsolutions_Magemlm_Adminhtml_UnilevelController extends Mage_Adminhtml_Controller_Action {
@@ -25,9 +27,10 @@ class Qsolutions_Magemlm_Adminhtml_UnilevelController extends Mage_Adminhtml_Con
 
     public function indexAction()
     {
-        $this->loadLayout();        
-        $this->_initAction()
-                ->renderLayout();
+        $this->loadLayout();
+		$msg 	= $this->_getSession()->getMessages(true); 
+		$this->getLayout()->getMessagesBlock()->addMessages($msg);             
+        $this->_initLayoutMessages('adminhtml/session')->renderLayout();
     }
 	
 	public function editAction()
@@ -42,7 +45,7 @@ class Qsolutions_Magemlm_Adminhtml_UnilevelController extends Mage_Adminhtml_Con
                     $model->setData($data)->setId($id);
                 }
             } else {
-                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('magemlm')->__('Example does not exist'));
+                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('magemlm')->__('Level does not exists'));
                 $this->_redirect('*/*/');
             }
         }
@@ -62,6 +65,30 @@ class Qsolutions_Magemlm_Adminhtml_UnilevelController extends Mage_Adminhtml_Con
 	
 	public function deleteAction () {
 		
+		$id 	= $this->getRequest()->getParam('id');
+		try {
+            if ($id) {
+            	$model 	= Mage::getModel('magemlm/unilevel')->load($id , 'unilevel_id');
+				$model->delete();
+					
+				$message = $this->__('Marketing level deleted');				
+            	Mage::getSingleton('adminhtml/session')->addSuccess($message);
+				$this->_redirect('*/*/');
+				return;
+			}
+				
+		} catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            if ($model && $model->getId()) {
+                $this->_redirect('*/*/edit', array('id' => $model->getId()));
+            } else {
+                $this->_redirect('*/*/');
+            }
+			return;
+        }
+		
+		Mage::getSingleton('adminhtml/session')->addError(Mage::helper('magemlm')->__('No data found to delete'));
+        $this->_redirect('*/*/');
 	}
 	
 	
@@ -84,10 +111,11 @@ class Qsolutions_Magemlm_Adminhtml_UnilevelController extends Mage_Adminhtml_Con
                 $model->save();
  
                 if (!$model->getId()) {
-                    Mage::throwException(Mage::helper('magemlm')->__('Error saving level data'));
+                    Mage::throwException(Mage::helper('magemlm')->__('Data not found'));
                 }
  
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('magemlm')->__('Example was successfully saved.'));
+                $message = $this->__('Data saved');				
+            	Mage::getSingleton('adminhtml/session')->addSuccess($message);
                 Mage::getSingleton('adminhtml/session')->setFormData(false);
  
                 // The following line decides if it is a "save" or "save and continue"
