@@ -196,31 +196,6 @@
                 </magemlm>
             </updates>
         </layout>
-        <acl>
-            <resources>
-                <admin>
-                    <children>
-                        <sales>
-                            <children>
-                                <magemlm>
-                                    <title>Qsolutions_Magemlm</title>
-                                </magemlm>
-                            </children>
-                        </sales>
-                        <system>
-                            <children>
-                                <config>
-                                    <children>
-                                        <magemlm>
-                                            <title>Qsolutions_Magemlm Config</title>
-                                        </magemlm>
-                                    </children>
-                                </config>
-                            </children>
-                        </system>
-                    </children>
-                </admin>
-            </resources>
-        </acl>
+        
     </adminhtml>
 </config>
