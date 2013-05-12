@@ -10,9 +10,19 @@ class Qsolutions_Magemlm_Helper_Data
     extends Mage_Core_Helper_Abstract {
 
 
+	public $maxDepth = 0;
+	
+
 	public function getCustomerName ($customerId) {
 		$customerModel = Mage::getModel('customer/customer')->load($customerId);
 		return $customerModel->getName();
+	}
+	
+	
+	public function getReferrerName ($customerId) {
+		$customer = Mage::getModel('magemlm/customer')->load($customerId , 'customer_id');
+		$referrer = $customer->getReferrerId();
+		return $this->getCustomerName($referrer); 
 	}
 	
 	
@@ -110,6 +120,7 @@ class Qsolutions_Magemlm_Helper_Data
 	
 	
 	public function structureDepth ($customerId , $currentDepth = 1) {
+		$depth = 0;
 		$customerChilds = $this->_hasChildren($customerId);
 		if ($customerChilds) {
 			$collection = Mage::getModel('magemlm/customer')->getCollection()->addFieldToFilter('referrer_id', array('eq' => $customerId));
