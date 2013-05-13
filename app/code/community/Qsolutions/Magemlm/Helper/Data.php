@@ -59,7 +59,7 @@ class Qsolutions_Magemlm_Helper_Data
 				exit;
 			}
 		} else {
-			
+			return date('Y-m');
 		}
 	}
 	
@@ -70,15 +70,20 @@ class Qsolutions_Magemlm_Helper_Data
 	
 	
 	public function countMonths($start, $end) {
-	    $startParsed 	= date_parse_from_format('Y-m', $start);
-	    $startMonth 	= $startParsed['month'];
-	    $startYear 		= $startParsed['year'];
-	
-	    $endParsed 		= date_parse_from_format('Y-m', $end);
-	    $endMonth 		= $endParsed['month'];
-	    $endYear 		= $endParsed['year'];
-	
-	    return ($endYear - $startYear) * 12 + ($endMonth - $startMonth) + 1;
+		
+		if ($start != $end ) {
+		    // $startParsed 	= date_parse_from_format('Y-m', $start);
+		    $startMonth 	= date('m' , strtotime($start)) ; // ['month'];
+		    $startYear 		= date('Y' , strtotime($start)) ; // ['year']
+		
+		    // $endParsed 		= date_parse_from_format('Y-m', $end);
+		    $endMonth 		= date('m' , strtotime($end)) ; // ['month']
+		    $endYear 		= date('Y' , strtotime($end)) ; //['year'];
+		
+		    return ($endYear - $startYear) * 12 + ($endMonth - $startMonth) + 1;
+		} else {
+			return 0;
+		}
 	}
 	
 	
