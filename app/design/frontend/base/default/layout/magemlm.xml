@@ -4,8 +4,6 @@
     <default> 
         <reference name="head">            
             <action method="addItem"><type>skin_css</type><name>css/magemlm.css</name></action>
-            <action method="addItem"><type>skin_js</type><script>js/jquery/jquery-1.9.1.js</script></action> 
-            <action method="addItem"><type>skin_js</type><script>js/jquery/jquery.jOrgChart.js</script></action>
         </reference>
         
         <reference name="header">

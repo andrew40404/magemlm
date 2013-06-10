@@ -37,8 +37,26 @@ class Qsolutions_Magemlm_Helper_Data
 	
 	public function getCustomerImage ($custemerId) {
 		$customerMlmModel = Mage::getModel('magemlm/customer')->load($custemerId , 'customer_id');
-		return $customerMlmModel->getMagemlmImage();
+		$image =  $customerMlmModel->getMagemlmImage();
+
+        if ($image == '' ) {
+            $customerModel 	= Mage::getModel('customer/customer')->load($custemerId);
+            $gender			= $customerModel->getGender();
+
+            if ($gender == '124') {
+                $genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'female.png';
+            } else if ($gender == '123' ) {
+                $genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'male.png';
+            } else {
+
+            }
+            $image = $genderImg;
+        } else {
+            $image = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . $image;
+        }
+        return '<img src="' . $image . '" width="80%" />';
 	}
+
 	
 	public function compensationSum () {
 		$sum	= 0;

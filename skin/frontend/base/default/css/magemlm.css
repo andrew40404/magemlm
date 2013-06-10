@@ -1,44 +1,42 @@
 /* Basic styling */
 /* Draw the lines */
-.jOrgChart .line {
+.mageMlm .line {
   height                : 20px;
   width                 : 4px;
 }
 
-.jOrgChart .down {
-  background-color 		: black;	
+.mageMlm .ChartDown {
+  background-color 		: #555;
   margin 				: 0px auto;
 }
 
-.jOrgChart .top {
-  border-top          : 3px solid black;
+.mageMlm .ChartTop {
+  border-top          : 2px solid #555;
 }
 
-.jOrgChart .left {
-  border-right          : 2px solid black;
+.mageMlm .ChartLeft {
+  border-right          : 2px solid #555 !important;
 }
 
-.jOrgChart .right {
-  border-left           : 2px solid black;
+.mageMlm .ChartRight {
+  border-left           : 2px solid #555 !important;
 }
 
 /* node cell */
-.jOrgChart td {
+.mageMlm td {
   text-align            : center;
   vertical-align        : top;
-  padding               : 0;
+  padding-left          : 2px;
+    padding-right: 2px;
 }
 
 /* The node */
-.jOrgChart .node {
-	font-size 			: 14px;
-	background-color 	: #35363B;
-	border-radius 		: 8px;
-	border 				: 5px solid silver;
-	color 				: #F38630;
-	-moz-border-radius 	: 8px;
-	height: 60px;;
-	width: 100px;
+.mageMlm .node {
+	font-size 			: 12px;
+	background-color 	: #fff;
+	border 				: 1px solid #c4c1bc;
+    min-height: 90px;;
+	width:  90px;
 	margin: auto;
 }
 	.node p{
@@ -57,4 +55,32 @@
 .drop-hover {
   border-style			: solid !important;
   border-color 			: #E05E00 !important;
+}
+
+.node .userName {
+    color: #fff;
+    font-weight: bold;
+    background: #fc9d36; border:0; padding:3px 10px;
+}
+
+.magemlm-left {
+    float: left;
+    cleaR: left;
+    widtH: 250px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.magemlm-right {
+    float: right;
+    clear: right;
+    widtH: 280px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.magemlm-full {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
 }
