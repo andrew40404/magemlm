@@ -9,65 +9,112 @@
 
 <?php
 
-	function displayStructure($referralId) {
-		$collection = Mage::getModel('magemlm/customer')->getCollection()->addFieldToFilter('referrer_id', array('eq' => $referralId));
 
-		if ($collection -> count() > 0) {
-			echo '<ul>';
-			foreach ($collection as $customer) {
-				if (Mage::helper('magemlm')->customerExists($customer->getCustomerId())) {
-					
-					echo '<li id="' . $customer->getCustomerId() . '">';
-					$image =  Mage::helper('magemlm')->getCustomerImage($customer->getCustomerId());
-					
-					if ($image == '' ) {
-						$customerModel 	= Mage::getModel('customer/customer')->load($customer->getCustomerId());
-						$gender			= $customerModel->getGender();
-						// var_dump($gender);
-						
-						if ($gender == '124') {
-							$genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'female.png';
-						} else if ($gender == '123' ) {
-							$genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'male.png';
-						} else {
-							
-						}
-						$image = $genderImg;
+	function displayMLMStruc ($referralId) {
+		$collection = Mage::getModel('magemlm/customer')->getCollection()->addFieldToFilter('referrer_id', array('eq' => $referralId));
+			
+			if ($collection->count() > 0) {
+				echo '
+				<table cellspacing="0" cellpadding="0">
+				<tr>
+					<td colspan="'.($collection->count() * 2).'" style="text-align: center; width: 80px;" class="node-cell">
+						<div class="node">' . Mage::helper('magemlm')->getCustomerName($referralId) . '</div>
+					</td>
+				</tr>';
+				echo '
+				<tr>
+					<td colspan="'.($collection->count()*2).'">
+						<div class="line down">
+						</div>
+					</td>
+				</tr>';
+				
+				echo '<tr>';
+				$i = 0;
+				foreach ($collection as $customer) {
+					if ($collection->count() == 1) {
+						echo '<td style="border-right: 2px solid black;">&nbsp;</td>
+							  <td style="border-left: 2px solid black;">&nbsp;</td>';
 					} else {
-						$image = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . $image;
+						if ($i == 0) {
+							echo '<td style="border-right: 2px solid black;">&nbsp;</td>
+								  <td style="border-top: 2px solid black; border-left: 2px solid black;">&nbsp;</td>';
+						} else if ($i == ($collection->count() - 1)){
+							echo '<td style="border-top: 2px solid black; border-right: 2px solid black;">&nbsp;</td>
+								  <td style="border-left: 2px solid black;">&nbsp;</td>';
+						} else {
+							echo '<td style="border-top: 2px solid black; border-right: 2px solid black;">&nbsp;</td>
+								  <td style="border-top: 2px solid black; border-left: 2px solid black;">&nbsp;</td>';
+						}
+						$i++;
 					}
-					
-					echo '<div class="magemlm_name">' . Mage::helper('magemlm')->getCustomerName($customer->getCustomerId()) . '</div>';
-					echo '<img src="' . $image . '" height="80px" class="node_img" /><br /> ';
-					
-					displayStructure($customer -> getCustomerId());
-					echo '</li>';
 				}
+				echo '</tr>';
+				echo '<tr>';
+				foreach ($collection as $customer) {
+					echo '<td colspan="2">';
+					displayMLMStruc($customer -> getCustomerId());
+					echo '</td>';
+				}
+				echo '</tr>';
+				echo '</table>';
+			} else {
+				echo '
+				<table cellspacing="0" cellpadding="0">
+				<tr>
+					<td colspan="'.($collection->count() * 2).'" style="text-align: center; width: 80px;" class="node-cell">
+						<div class="node">' . Mage::helper('magemlm')->getCustomerName($referralId) . '</div>
+					</td>
+				</tr>
+				</table>';
 			}
-			echo '</ul>';
-		}
+			
 	}
+
+	// function displayStructure($referralId) {
+		// $collection = Mage::getModel('magemlm/customer')->getCollection()->addFieldToFilter('referrer_id', array('eq' => $referralId));
+// 
+		// if ($collection -> count() > 0) {
+			// echo '<ul>';
+			// foreach ($collection as $customer) {
+				// if (Mage::helper('magemlm')->customerExists($customer->getCustomerId())) {
+// 					
+					// echo '<li id="' . $customer->getCustomerId() . '">';
+					// $image =  Mage::helper('magemlm')->getCustomerImage($customer->getCustomerId());
+// 					
+					// if ($image == '' ) {
+						// $customerModel 	= Mage::getModel('customer/customer')->load($customer->getCustomerId());
+						// $gender			= $customerModel->getGender();
+						// // var_dump($gender);
+// 						
+						// if ($gender == '124') {
+							// $genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'female.png';
+						// } else if ($gender == '123' ) {
+							// $genderImg = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . 'male.png';
+						// } else {
+// 							
+						// }
+						// $image = $genderImg;
+					// } else {
+						// $image = Mage::getBaseUrl('media') . DS . 'magemlm' . DS . $image;
+					// }
+// 					
+					// echo '<div class="magemlm_name">' . Mage::helper('magemlm')->getCustomerName($customer->getCustomerId()) . '</div>';
+					// echo '<img src="' . $image . '" height="80px" class="node_img" /><br /> ';
+// 					
+					// displayStructure($customer -> getCustomerId());
+					// echo '</li>';
+				// }
+			// }
+			// echo '</ul>';
+		// }
+	// }
 ?>
 
-<ul id="org" style="display:none;">
-	<li id="<?php echo Mage::helper('customer')->getCustomer()->getId(); ?>">
-		<?php echo '<div class="magemlm_name">' .  Mage::helper('customer')->getCustomer()->getName() . '</div>'; ?>
-		<?php echo '<img src="' . Mage::getBaseUrl('media') . DS . 'magemlm' . DS . Mage::helper('magemlm')->getCustomerImage(Mage::helper('customer')->getCustomer()->getId()) . '" width="60px" class="node_img" /><br /> '; '</div>'; ?>
-		<?php displayStructure(Mage::helper('customer')->getCustomer()->getId()); ?>
-	</li>
-</ul> 
 
-<div id="chart" class="orgChart" style="overflow: scroll;"></div>
+<div id="chart" class="orgChart">
+	<div class="jOrgChart">
+		<?php displayMLMStruc(Mage::helper('customer')->getCustomer()->getId()); ?>
+	</div>
+</div>
 
-
-<script>
-
-	jQuery(document).ready(function() {
-		jQuery("#org").jOrgChart({
-			chartElement : '#chart',
-			dragAndDrop : true
-		});
-	});
-	
-
-</script>
